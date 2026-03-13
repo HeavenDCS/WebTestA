@@ -89,8 +89,8 @@ document.addEventListener('mouseup', () => {
     cursor.style.transform = 'translate(-50%, -50%) scale(1)';
 });
 
-// Time Counter Logic (03/08/2025 at 07:13)
-const startDate = new Date('2025-03-08T07:13:00').getTime();
+// Time Counter Logic (August 3, 2025 at 07:13)
+const startDate = new Date('2025-08-03T07:13:00').getTime();
 const daysEl = document.getElementById('days');
 const hoursEl = document.getElementById('hours');
 const minutesEl = document.getElementById('minutes');
