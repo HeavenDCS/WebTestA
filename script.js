@@ -125,7 +125,10 @@ startBtn.addEventListener('click', () => {
     // Attempt to play music
     let playPromise = audio.play();
     if (playPromise !== undefined) {
-        playPromise.catch(error => console.warn("Audio file 'song.mp3' missing or blocked.", error));
+        playPromise.catch(error => {
+            console.warn("Audio file missing or blocked.", error);
+            alert("Music Playback Failed!\n\nReason: " + error.message);
+        });
     }
 
     // Start Sequence
