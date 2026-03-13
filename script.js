@@ -38,24 +38,48 @@ const cursor = document.getElementById('custom-cursor');
 const trail = document.getElementById('cursor-trail');
 const ambientBg = document.querySelector('.ambient-background');
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let bgX = 50;
+let bgY = 50;
 
-    trail.style.left = e.clientX + 'px';
-    trail.style.top = e.clientY + 'px';
+function updateMouse(e) {
+    mouseX = e.clientX || (e.touches && e.touches[0].clientX) || mouseX;
+    mouseY = e.clientY || (e.touches && e.touches[0].clientY) || mouseY;
 
-    // Particle Ripple / Dynamic Background Tracking
-    // We gently shift the background position based on mouse coordinates to create a ripple/following effect
-    const xPercent = (e.clientX / window.innerWidth) * 100;
-    const yPercent = (e.clientY / window.innerHeight) * 100;
-    // Overlaying the animation with a dynamic radial gradient exactly where the mouse is.
+    // Only move cursor elements if not touch device, but we update coordinates regardless
+    if (cursor.style.display !== 'none') {
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+        
+        trail.style.left = mouseX + 'px';
+        trail.style.top = mouseY + 'px';
+    }
+}
+
+document.addEventListener('mousemove', updateMouse);
+document.addEventListener('touchmove', updateMouse, { passive: true });
+document.addEventListener('touchstart', updateMouse, { passive: true });
+
+// Smoothly animate the gradient tracking independent of mouse fire scale
+function animateBackground() {
+    // Lerp background position toward mouse position (smooth easing)
+    const targetX = (mouseX / window.innerWidth) * 100;
+    const targetY = (mouseY / window.innerHeight) * 100;
+    
+    bgX += (targetX - bgX) * 0.05;
+    bgY += (targetY - bgY) * 0.05;
+
+    // Instead of rebuilding the whole gradient every frame, we shift the gradient's center coordinates securely.
     ambientBg.style.background = `
-        radial-gradient(circle at ${xPercent}% ${yPercent}%, rgba(255, 105, 135, 0.25), transparent 40%),
+        radial-gradient(circle at ${bgX}% ${bgY}%, rgba(255, 105, 135, 0.25), transparent 40%),
         radial-gradient(circle at 15% 50%, var(--blob-1), transparent 50%),
         radial-gradient(circle at 85% 30%, var(--blob-2), transparent 50%)
     `;
-});
+    
+    requestAnimationFrame(animateBackground);
+}
+requestAnimationFrame(animateBackground);
 
 document.addEventListener('mousedown', () => {
     cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
