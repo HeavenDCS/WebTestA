@@ -23,6 +23,34 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: none; /* Hide default mortal cursor */
+}
+
+/* Custom Cursor */
+#custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 138, 166, 0.8);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    box-shadow: 0 0 10px rgba(255, 138, 166, 0.5);
+}
+
+#cursor-trail {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 138, 166, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: left 0.15s ease, top 0.15s ease;
+    box-shadow: 0 0 10px rgba(255, 138, 166, 0.4);
 }
 
 /* Modern ambient animated background */
@@ -136,6 +164,24 @@ body, html {
     color: var(--text-primary);
     margin-bottom: 1.5rem;
     font-weight: 300;
+    min-height: 1.8rem; /* Keeps layout stable while typing */
+}
+
+/* Typing Cursor Effect */
+.letter-content p::after {
+    content: '|';
+    opacity: 1;
+    animation: blink 1s infinite;
+    color: var(--accent);
+    display: none; /* Only show when typing is active on this line */
+}
+
+.letter-content p.typing::after {
+    display: inline-block;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 .letter-content .signature {
@@ -190,7 +236,7 @@ body, html {
     transform: rotate(-45deg);
     animation: floatUp 15s linear infinite;
     opacity: 0;
-    pointer-events: none;
+    pointer-events: auto; /* Allow clicking */
     z-index: 5;
     box-shadow: 0 0 20px rgba(255, 105, 135, 0.3);
     backdrop-filter: blur(4px);
@@ -234,4 +280,88 @@ body, html {
         transform: translateY(-120vh) rotate(-45deg) scale(1.5);
         opacity: 0;
     }
+}
+
+/* Time Counter */
+.time-counter {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1.5s ease;
+    z-index: 15;
+}
+
+.time-counter.active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.time-counter p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.time-display {
+    font-family: 'Inter', monospace;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    background: rgba(20, 22, 26, 0.4);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    letter-spacing: 1px;
+}
+
+/* Secret Star */
+.secret-star {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 2s ease, transform 0.3s ease;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.secret-star.active {
+    opacity: 0.2;
+    pointer-events: auto;
+}
+
+.secret-star.active:hover {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+#secret-message {
+    z-index: 50;
+}
+
+.secret-content {
+    background: rgba(255, 105, 135, 0.1);
+    border-color: rgba(255, 105, 135, 0.3);
+    box-shadow: 0 10px 40px rgba(255, 105, 135, 0.2);
+}
+
+/* Audio Visualizer Canvas */
+#visualizer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; /* It will cover the screen but draw at the bottom via JS */
+    z-index: 1; /* Behind hearts and text, but above background */
+    pointer-events: none;
+    opacity: 0.4;
+    filter: blur(2px);
 }

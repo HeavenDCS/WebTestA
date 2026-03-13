@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="custom-cursor"></div>
+    <div id="cursor-trail"></div>
+
     <div class="ambient-background"></div>
     
     <div class="main-container">
@@ -24,12 +27,12 @@
             </button>
         </div>
 
-        <!-- Step 2: The Love Letter -->
+        <!-- Step 2: The Love Letter (Typing Effect) -->
         <div id="letter-section" class="sequence-section">
             <div class="letter-content">
-                <p>To the most beautiful girl in the world,</p>
-                <p>Every moment with you feels like a dream I never want to wake up from. You are my light, my peace, and my entire heart. I wanted to make this just to remind you how deeply, truly, and completely I love you. My world is infinitely better simply because you are in it.</p>
-                <p class="signature">- Yours, always.</p>
+                <p id="typed-greeting"></p>
+                <p id="typed-body"></p>
+                <p id="typed-signature" class="signature"></p>
             </div>
         </div>
 
@@ -41,7 +44,33 @@
             </div>
         </div>
 
+        <!-- Secret Message -->
+        <div id="secret-message" class="sequence-section">
+            <div class="letter-content secret-content">
+                <p>You found my secret.</p>
+                <p>Even when the verses end and the music fades, my love for you never will. You are my forever and always. I promise to choose you, every single day.</p>
+                <p class="signature">- Always.</p>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Time Counter -->
+    <div id="time-counter" class="time-counter">
+        <p>I have loved you for</p>
+        <div class="time-display">
+            <span id="days">00</span>d : 
+            <span id="hours">00</span>h : 
+            <span id="minutes">00</span>m : 
+            <span id="seconds">00</span>s
+        </div>
+    </div>
+
+    <!-- Secret Star -->
+    <div id="secret-star" class="secret-star">✨</div>
+
+    <!-- Audio Visualizer Canvas -->
+    <canvas id="visualizer"></canvas>
 
     <!-- The Song -->
     <audio id="love-song" loop>
