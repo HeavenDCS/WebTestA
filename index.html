@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="ambient-background"></div>
+    
+    <div class="main-container">
+        
+        <!-- Step 1: The Button -->
+        <div id="intro-section" class="sequence-section active">
+            <button id="start-btn" class="modern-btn">
+                <svg class="play-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                </svg>
+                <span>For You</span>
+            </button>
+        </div>
+
+        <!-- Step 2: The Love Letter -->
+        <div id="letter-section" class="sequence-section">
+            <div class="letter-content">
+                <p>To the most beautiful girl in the world,</p>
+                <p>Every moment with you feels like a dream I never want to wake up from. You are my light, my peace, and my entire heart. I wanted to make this just to remind you how deeply, truly, and completely I love you. My world is infinitely better simply because you are in it.</p>
+                <p class="signature">- Yours, always.</p>
+            </div>
+        </div>
+
+        <!-- Step 3: The Verses -->
+        <div id="verses-section" class="sequence-section">
+            <div class="verse-container">
+                <p id="verse-text" class="verse-text"></p>
+                <p id="verse-ref" class="verse-ref"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The Song -->
+    <audio id="love-song" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
