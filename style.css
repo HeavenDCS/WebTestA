@@ -165,6 +165,7 @@ body, html {
     margin-bottom: 1.5rem;
     font-weight: 300;
     min-height: 1.8rem; /* Keeps layout stable while typing */
+    word-break: break-word; /* Ensure long words on mobile don't overflow */
 }
 
 /* Typing Cursor Effect */
@@ -223,6 +224,27 @@ body, html {
     }
     .verse-text {
         font-size: 1.5rem;
+    }
+}
+
+/* Specific Mobile Fixes (Touch Devices) */
+@media (hover: none) and (pointer: coarse), (max-width: 600px) {
+    body, html {
+        cursor: auto; /* Restore default cursor for touch screens just in case */
+    }
+    
+    #custom-cursor, #cursor-trail {
+        display: none !important; /* Completely hide the custom cursor on phones */
+    }
+
+    .letter-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    .letter-content p {
+        font-size: 1rem;
+        line-height: 1.6;
     }
 }
 

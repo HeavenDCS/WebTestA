@@ -151,7 +151,8 @@ function runSequence() {
 
     // 3. Keep letter on screen for a while. We extend the time slightly because typing takes time.
     // Typing length is roughly: Greeting (38 chars) + Body (260 chars) + Sig (16 chars) = ~314 chars.
-    // At ~35ms per char, it takes about 11 seconds just to type. We'll wait 22 seconds total.
+    // At ~35ms per char, it takes about 11 seconds just to type. 
+    // We wait 28 seconds total so they have plenty of time to read it once it finishes typing, even on small screens.
     setTimeout(() => {
         letterSection.classList.remove('active');
         letterSection.classList.add('fade-out');
@@ -165,7 +166,7 @@ function runSequence() {
             secretStar.classList.add('active');
         }, 1500);
 
-    }, 24000);
+    }, 28000);
 }
 
 // Typing Effect Mechanics
